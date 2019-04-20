@@ -63,7 +63,7 @@ function KeywordSearchBox() {
 
 function TopBar() {
   const [active, setActive] = useState(true);
-  const {allUsers, filter, setFilter} = useContext(Context);
+  const {allUsers, refreshAllUsers, filter, setFilter} = useContext(Context);
 
   const {admins, virtualClusters} = useMemo(() => {
     const admins = Object.create(null);
@@ -95,7 +95,7 @@ function TopBar() {
       iconProps: {
         iconName: 'Refresh',
       },
-      // onClick: refreshJobs,
+      onClick: refreshAllUsers,
     };
   }
 
@@ -204,7 +204,7 @@ function TopBar() {
       text: 'Admin',
       buttonStyles: {root: {backgroundColor: 'transparent'}},
       iconProps: {
-        iconName: 'Contact',
+        iconName: 'Clock',
       },
       subMenuProps: {
         items: Object.keys(admins).map(getItem).concat([{
@@ -298,8 +298,8 @@ function TopBar() {
 
   const filterBarItems = [getKeyword()];
   const filterBarFarItems = [
-    getAdmin(),
     getVirtualCluster(),
+    getAdmin(),
     getClear(),
   ];
 

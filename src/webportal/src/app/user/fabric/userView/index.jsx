@@ -30,6 +30,8 @@ import TopBar from './topBar';
 import Table from './table';
 import Ordering from './ordering';
 import Filter from './filter';
+import Pagination from './pagination';
+import Paginator from './paginator';
 
 import webportalConfig from '../../../config/webportal.config';
 import userAuth from '../../user-auth/user-auth.component';
@@ -67,22 +69,8 @@ export default function UserView() {
     });
   }, []);
 
-  // const [virtualClusters, setVirtualClusters] = useState([]);
-  // const [allUsers, setAllUsers] = useState([]);
-  // const [virtualClusters, setVirtualClusters] = useState(['default', 'nni', 'vc1', 'vc2', 'vc3']);
-  const [allUsers, setAllUsers] = useState([{'username': 'Acapital', 'admin': 'false', 'virtualCluster': 'default', 'hasGithubPAT': false}, {'username': 'anbhu', 'admin': 'true', 'virtualCluster': 'default,vc1,vc2,vc3', 'hasGithubPAT': false}, {'username': 'biwang', 'admin': 'true', 'virtualCluster': 'default,vc1,vc2,vc3', 'hasGithubPAT': false}, {'username': 'brkyle', 'admin': 'false', 'virtualCluster': 'default', 'hasGithubPAT': false}, {'username': 'chisong', 'admin': 'true', 'virtualCluster': 'default,nni,vc1,vc2,vc3', 'hasGithubPAT': false}, {'username': 'core', 'admin': 'true', 'virtualCluster': 'default,vc1,vc2,vc3', 'hasGithubPAT': false}, {'username': 'imported1', 'admin': 'false', 'virtualCluster': 'default', 'hasGithubPAT': false}, {'username': 'imported6', 'admin': 'false', 'virtualCluster': 'default', 'hasGithubPAT': false}, {'username': 'jackzh', 'admin': 'true', 'virtualCluster': 'default,vc1,vc2,vc3', 'hasGithubPAT': false}, {'username': 'jerasley', 'admin': 'true', 'virtualCluster': 'default,vc1,vc2,vc3', 'hasGithubPAT': false}, {'username': 'jlema', 'admin': 'false', 'virtualCluster': 'default', 'hasGithubPAT': false}, {'username': 'lchao', 'admin': 'true', 'virtualCluster': 'default,vc1,vc2,vc3', 'hasGithubPAT': false}, {'username': 'lchao1', 'admin': 'false', 'virtualCluster': 'default', 'hasGithubPAT': false}, {'username': 'lchao10', 'admin': 'false', 'virtualCluster': 'default,vc1,vc2', 'hasGithubPAT': false}, {'username': 'lchao11', 'admin': 'false', 'virtualCluster': 'default', 'hasGithubPAT': false}, {'username': 'lchao2', 'admin': 'false', 'virtualCluster': 'default', 'hasGithubPAT': false}, {'username': 'lchao3', 'admin': 'false', 'virtualCluster': 'default', 'hasGithubPAT': false}, {'username': 'lchao4', 'admin': 'false', 'virtualCluster': 'default', 'hasGithubPAT': false}, {'username': 'lchao5', 'admin': 'false', 'virtualCluster': 'default', 'hasGithubPAT': false}, {'username': 'lchao6', 'admin': 'false', 'virtualCluster': 'default', 'hasGithubPAT': false}, {'username': 'lchao7', 'admin': 'false', 'virtualCluster': 'default', 'hasGithubPAT': false}, {'username': 'lchao8', 'admin': 'false', 'virtualCluster': 'default', 'hasGithubPAT': false}, {'username': 'lchao9', 'admin': 'false', 'virtualCluster': 'default', 'hasGithubPAT': false}, {'username': 'lillzhen', 'admin': 'true', 'virtualCluster': 'default,vc1,vc2,vc3', 'hasGithubPAT': false}, {'username': 'nni_test', 'admin': 'false', 'virtualCluster': 'default', 'hasGithubPAT': false}, {'username': 'scarlett', 'admin': 'true', 'virtualCluster': 'default,nni,vc1,vc2,vc3', 'hasGithubPAT': false}, {'username': 'test', 'admin': 'false', 'virtualCluster': 'default', 'hasGithubPAT': false}, {'username': 'v_yufxu', 'admin': 'true', 'virtualCluster': 'default,vc1,vc2,vc3', 'hasGithubPAT': false}, {'username': 'vc1', 'admin': 'false', 'virtualCluster': 'default,vc1', 'hasGithubPAT': false}, {'username': 'vinay', 'admin': 'false', 'virtualCluster': 'default', 'hasGithubPAT': false}, {'username': 'xinz', 'admin': 'true', 'virtualCluster': 'default,vc1,vc2,vc3', 'hasGithubPAT': false}, {'username': 'zimiao', 'admin': 'false', 'virtualCluster': 'default,vc1', 'hasGithubPAT': false}]);
-
-  // const refreshAllVcs = () => {
-  //   $.ajax({
-  //     url: `${webportalConfig.restServerUri}/api/v1/virtual-clusters`,
-  //     type: 'GET',
-  //     dataType: 'json',
-  //     success: (data) => {
-  //       setVirtualClusters(Object.keys(data).sort());
-  //     },
-  //   });
-  // };
-  // useEffect(refreshAllVcs, []);
+  const [allUsers, setAllUsers] = useState([]);
+  // const [allUsers, setAllUsers] = useState([{'username': 'Acapital', 'admin': 'false', 'virtualCluster': 'default', 'hasGithubPAT': false}, {'username': 'anbhu', 'admin': 'true', 'virtualCluster': 'default,vc1,vc2,vc3', 'hasGithubPAT': false}, {'username': 'biwang', 'admin': 'true', 'virtualCluster': 'default,vc1,vc2,vc3', 'hasGithubPAT': false}, {'username': 'brkyle', 'admin': 'false', 'virtualCluster': 'default', 'hasGithubPAT': false}, {'username': 'chisong', 'admin': 'true', 'virtualCluster': 'default,nni,vc1,vc2,vc3', 'hasGithubPAT': false}, {'username': 'core', 'admin': 'true', 'virtualCluster': 'default,vc1,vc2,vc3', 'hasGithubPAT': false}, {'username': 'imported1', 'admin': 'false', 'virtualCluster': 'default', 'hasGithubPAT': false}, {'username': 'imported6', 'admin': 'false', 'virtualCluster': 'default', 'hasGithubPAT': false}, {'username': 'jackzh', 'admin': 'true', 'virtualCluster': 'default,vc1,vc2,vc3', 'hasGithubPAT': false}, {'username': 'jerasley', 'admin': 'true', 'virtualCluster': 'default,vc1,vc2,vc3', 'hasGithubPAT': false}, {'username': 'jlema', 'admin': 'false', 'virtualCluster': 'default', 'hasGithubPAT': false}, {'username': 'lchao', 'admin': 'true', 'virtualCluster': 'default,vc1,vc2,vc3', 'hasGithubPAT': false}, {'username': 'lchao1', 'admin': 'false', 'virtualCluster': 'default', 'hasGithubPAT': false}, {'username': 'lchao10', 'admin': 'false', 'virtualCluster': 'default,vc1,vc2', 'hasGithubPAT': false}, {'username': 'lchao11', 'admin': 'false', 'virtualCluster': 'default', 'hasGithubPAT': false}, {'username': 'lchao2', 'admin': 'false', 'virtualCluster': 'default', 'hasGithubPAT': false}, {'username': 'lchao3', 'admin': 'false', 'virtualCluster': 'default', 'hasGithubPAT': false}, {'username': 'lchao4', 'admin': 'false', 'virtualCluster': 'default', 'hasGithubPAT': false}, {'username': 'lchao5', 'admin': 'false', 'virtualCluster': 'default', 'hasGithubPAT': false}, {'username': 'lchao6', 'admin': 'false', 'virtualCluster': 'default', 'hasGithubPAT': false}, {'username': 'lchao7', 'admin': 'false', 'virtualCluster': 'default', 'hasGithubPAT': false}, {'username': 'lchao8', 'admin': 'false', 'virtualCluster': 'default', 'hasGithubPAT': false}, {'username': 'lchao9', 'admin': 'false', 'virtualCluster': 'default', 'hasGithubPAT': false}, {'username': 'lillzhen', 'admin': 'true', 'virtualCluster': 'default,vc1,vc2,vc3', 'hasGithubPAT': false}, {'username': 'nni_test', 'admin': 'false', 'virtualCluster': 'default', 'hasGithubPAT': false}, {'username': 'scarlett', 'admin': 'true', 'virtualCluster': 'default,nni,vc1,vc2,vc3', 'hasGithubPAT': false}, {'username': 'test', 'admin': 'false', 'virtualCluster': 'default', 'hasGithubPAT': false}, {'username': 'v_yufxu', 'admin': 'true', 'virtualCluster': 'default,vc1,vc2,vc3', 'hasGithubPAT': false}, {'username': 'vc1', 'admin': 'false', 'virtualCluster': 'default,vc1', 'hasGithubPAT': false}, {'username': 'vinay', 'admin': 'false', 'virtualCluster': 'default', 'hasGithubPAT': false}, {'username': 'xinz', 'admin': 'true', 'virtualCluster': 'default,vc1,vc2,vc3', 'hasGithubPAT': false}, {'username': 'zimiao', 'admin': 'false', 'virtualCluster': 'default,vc1', 'hasGithubPAT': false}]);
 
   const refreshAllUsers = () => {
     userAuth.checkToken((token) => {
@@ -99,10 +87,10 @@ export default function UserView() {
       });
     });
   };
-  // useEffect(refreshAllUsers, []);
+  useEffect(refreshAllUsers, []);
 
   const [ordering, setOrdering] = useState(new Ordering());
-  // const [pagination, setPagination] = useState(new Pagination());
+  const [pagination, setPagination] = useState(new Pagination());
 
   const initialFilter = useMemo(() => {
     const filter = new Filter();
@@ -111,6 +99,7 @@ export default function UserView() {
   });
   const [filter, setFilter] = useState(initialFilter);
   const [filteredUsers, setFilteredUsers] = useState(null);
+  const [selectedUsers, setSelectedUsers] = useState([]);
 
   useEffect(() => filter.save(), [filter]);
 
@@ -122,25 +111,28 @@ export default function UserView() {
     applyFilter(allUsers, filter);
   }, [applyFilter, allUsers, filter]);
 
-  // useEffect(() => {
-  //   setPagination(new Pagination(pagination.itemsPerPage, 0));
-  // }, [filteredUsers]);
-
+  useEffect(() => {
+    setPagination(new Pagination(pagination.itemsPerPage, 0));
+  }, [filteredUsers]);
 
   const context = {
     allUsers,
+    refreshAllUsers,
     filteredUsers,
-    // virtualClusters,
     ordering,
     setOrdering,
     filter,
     setFilter,
+    pagination,
+    setPagination,
+    selectedUsers,
+    setSelectedUsers,
   };
 
   return (
     <Context.Provider value={context}>
       <Fabric style={{height: '100%'}}>
-        <Stack verticalFill styles={{root: {position: 'relative'}}} gap='1rem'>
+        <Stack verticalFill styles={{root: {position: 'relative'}}}>
           <Stack.Item>
             <TopBar />
           </Stack.Item>
@@ -148,8 +140,7 @@ export default function UserView() {
             <Table />
           </Stack.Item>
           <Stack.Item>
-          </Stack.Item>
-          <Stack.Item>
+            <Paginator />
           </Stack.Item>
         </Stack>
       </Fabric>

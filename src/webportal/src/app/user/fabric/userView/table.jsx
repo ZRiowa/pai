@@ -18,9 +18,7 @@
 import React, {useContext, useMemo} from 'react';
 
 import {DefaultButton} from 'office-ui-fabric-react/lib/Button';
-import {Link} from 'office-ui-fabric-react/lib/Link';
 import {ColumnActionsMode, Selection} from 'office-ui-fabric-react/lib/DetailsList';
-import {MessageBar, MessageBarType} from 'office-ui-fabric-react/lib/MessageBar';
 import {ShimmeredDetailsList} from 'office-ui-fabric-react/lib/ShimmeredDetailsList';
 import {FontClassNames} from 'office-ui-fabric-react/lib/Styling';
 
@@ -31,18 +29,18 @@ import {toBool, getVirtualCluster} from './utils';
 
 export default function Table() {
   // const {allJobs, stopJob, filteredJobs, setSelectedJobs, filter, ordering, setOrdering, pagination} = useContext(Context);
-  const {allUsers, ordering, setOrdering} = useContext(Context);
+  const {allUsers, filteredUsers, ordering, setOrdering, pagination, setSelectedUsers} = useContext(Context);
 
-  // /**
-  //  * @type {import('office-ui-fabric-react').Selection}
-  //  */
-  // const selection = useMemo(() => {
-  //   return new Selection({
-  //     onSelectionChanged() {
-  //       setSelectedJobs(selection.getSelection());
-  //     },
-  //   });
-  // }, []);
+  /**
+   * @type {import('office-ui-fabric-react').Selection}
+   */
+  const selection = useMemo(() => {
+    return new Selection({
+      onSelectionChanged() {
+        setSelectedUsers(selection.getSelection());
+      },
+    });
+  }, []);
 
   /**
    * @param {React.MouseEvent<HTMLElement>} event
@@ -168,9 +166,12 @@ export default function Table() {
 
   return (
     <ShimmeredDetailsList
-      items={ordering.apply(allUsers || [])}
+      items={pagination.apply(ordering.apply(filteredUsers || []))}
       setKey="key"
       columns={columns}
+      enableShimmer={allUsers === null || allUsers.length == 0}
+      shimmerLines={pagination.itemsPerPage}
+      selection={selection}
     />
   );
 }
